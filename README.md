@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Yehia's Career Hub
 
-## Getting Started
+**Author:** Yehia (UL2IMATE)
 
-First, run the development server:
+## Project Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Yehia's Career Hub is a Next.js web application built to organize and track a 60-day post-graduation roadmap to landing a software development role. It features:
+- **Two-Month Roadmap (`/plan`):** A step-by-step preparation and practice strategy.
+- **Opportunities Board (`/opportunities`):** A curated catalog of internship and junior developer openings.
+- **Dynamic Opportunity Details (`/opportunities/[id]`):** Dedicated pages for individual job listings with dynamic routing and static prerendering.
+- **Dashboard (`/Dashboard`):** An application tracker and overview hub with dedicated nested layouts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How to Run Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/UL2IMATE/yehia-career-path.git
+   cd yehia-career-path
+   ```
 
-## Learn More
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Open in your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. **Build for production (optional):**
+   ```bash
+   npm run build
+   npm run start
+   ```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Conceptual Questions & Answers
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 1. Why did you use `await` when reading `params`?
+In modern Next.js (version 15 and above), `params` (and `searchParams`) provided to page components and layouts is passed as a **Promise** rather than a plain synchronous object. 
+
+This architectural change enables Next.js to stream and prerender static shells early without waiting synchronously on incoming request parameters. By using `await params`, the Server Component cleanly resolves the parameters asynchronously before accessing route properties like `id`.
+
+### 2. Why is the route ID a string?
+In HTTP and web routing, all URL paths and parameters are parsed directly from the incoming uniform resource locator (URL), which is fundamentally **text/string data**. 
+
+Even if an ID appears to be a number (such as `/opportunities/1`), URLs do not possess intrinsic numeric data types. Therefore, Next.js provides the dynamic route segment `[id]` as a string (`"1"`). If a numeric comparison or lookup is ever required, developers explicitly cast or parse it (e.g., via `Number(id)` or comparing as strings `opp.id === id`).
+
+### 3. What belongs in the dashboard layout, and what belongs in each dashboard page?
+- **Dashboard Layout (`layout.tsx`):**
+  - Persistent, shared UI elements that remain visible across all dashboard sub-routes without re-rendering or losing state during navigation.
+  - Examples: Navigation bars (links between `/Dashboard` Overview and `/Dashboard/applications`), sidebars, headers, user profile cards, and global dashboard wrappers/styling.
+- **Dashboard Pages (`page.tsx`, `applications/page.tsx`):**
+  - View-specific content that changes based on the exact route the user is visiting.
+  - Examples: The overview statistics and motivational summary belong on `/Dashboard/page.tsx`, while the specific list of submitted application cards belongs exclusively on `/Dashboard/applications/page.tsx`.
