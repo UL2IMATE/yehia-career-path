@@ -1,6 +1,6 @@
 # Yehia's Career Hub
 
-**Author:** Yehia (UL2IMATE)
+**Author:** Yehia Abdelaziz Mohamed Ahmed Omer
 
 ## Project Description
 
