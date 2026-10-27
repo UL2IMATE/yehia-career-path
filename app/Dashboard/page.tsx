@@ -1,15 +1,15 @@
 import React from "react";
-import { opportunities } from "@/data/opportunities";
+import { applications } from "@/data/applications";
 
 const page = () => {
   return (
     <>
-      <main className=' p-6  flex flex-col gap-15 justify-center"'>
+      <main className="p-6 flex flex-col gap-15 justify-center">
         <div className="flex flex-col gap-5">
           <h1 className="text-6xl md:text-8xl font-bold text-blue-900">
             Dashboard Overview
           </h1>
-          <h3 className=" text-lg md:text-xl  font-bold text-blue-700">
+          <h3 className="text-lg md:text-xl font-bold text-blue-700">
             Track your job search momentum and review your submitted
             applications in one place.
           </h3>
@@ -17,7 +17,7 @@ const page = () => {
 
         <p className="text-lg text-gray-700 px-5">
           total applications:{" "}
-          <span className="font-bold">{opportunities.length} </span>
+          <span className="font-bold">{applications.length} </span>
         </p>
         <div className="text-blue-950 text-3xl max-w-7xl px-5">
           <span className="font-bold "> Keep Going!</span> Every application you
